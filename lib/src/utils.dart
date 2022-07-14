@@ -22,13 +22,29 @@ const List<Color> defaultColorList = [
   Color(0xFF00b894),
 ];
 
+// [Missing, Overdue, Used, Condemned, Good Working Order, Damaged, Taken Away]
+
+Map<String, Color> defaultColorMap = {
+  "Missing": Colors.red,
+  "Overdue": Colors.green,
+  "Used": Colors.blue,
+  "Condemned": Colors.purple,
+  "Good Working Order": Colors.yellow,
+  "Damaged": Colors.orange,
+  "Taken Away": Colors.black,
+};
+
 Color getColor(List<Color> colorList, int index, List<String> titles) {
   print(titles);
-  if (index > (colorList.length - 1)) {
-    final newIndex = index % (colorList.length - 1);
-    return colorList.elementAt(newIndex);
+  // if (index > (colorList.length - 1)) {
+  //   final newIndex = index % (colorList.length - 1);
+  //   return colorList.elementAt(newIndex);
+  // }
+  String key = titles[index];
+  if (defaultColorMap.containsKey(key)) {
+    return defaultColorMap[key]!;
   }
-  return colorList.elementAt(index);
+  return defaultColorMap['Missing']!;
 }
 
 List<Color> getGradient(List<List<Color>> gradientList, int index,
