@@ -135,6 +135,7 @@ class _PieChartState extends State<PieChart>
                     widget.chartValuesOptions.chartValueBackgroundColor,
                 values: legendValues,
                 titles: legendTitles,
+                colorMap: widget.colorMap,
                 showValuesInPercentage:
                     widget.chartValuesOptions.showChartValuesInPercentage,
                 decimalPlaces: widget.chartValuesOptions.decimalPlaces,
