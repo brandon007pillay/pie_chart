@@ -35,8 +35,11 @@ Color getColor(
     }
     return colorList.elementAt(index);
   } else {
-
     String key = titles[index];
+    print(index);
+    print(key);
+    print(colorMap);
+    print('+++++++');
     if (colorMap.containsKey(key)) {
       return colorMap[key]!;
     }

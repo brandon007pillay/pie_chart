@@ -29,12 +29,12 @@ class PieChartPainter extends CustomPainter {
   final DegreeOptions degreeOptions;
   final Color baseChartColor;
   final double? totalValue;
+  final Map<String, Color>? colorMap; 
 
   late double _prevAngle;
 
   double get drawPercentage => degreeOptions.totalDegrees / fullDegree;
 
-  Map<String, Color>? colorMap; 
   PieChartPainter(
     double angleFactor,
     this.showChartValues,
