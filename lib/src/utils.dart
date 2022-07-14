@@ -28,10 +28,6 @@ Color getColor(
   List<String> titles,
   Map<String, Color>? colorMap,
 ) {
-    print(index);
-    print(colorList);
-    print(colorMap);
-    print('+++++++');
   if (colorMap == null) {
     if (index > (colorList.length - 1)) {
       final newIndex = index % (colorList.length - 1);
