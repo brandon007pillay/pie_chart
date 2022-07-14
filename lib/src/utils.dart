@@ -28,6 +28,10 @@ Color getColor(
   List<String> titles,
   Map<String, Color>? colorMap,
 ) {
+    print(index);
+    print(colorList);
+    print(colorMap);
+    print('+++++++');
   if (colorMap == null) {
     if (index > (colorList.length - 1)) {
       final newIndex = index % (colorList.length - 1);
@@ -36,10 +40,6 @@ Color getColor(
     return colorList.elementAt(index);
   } else {
     String key = titles[index];
-    print(index);
-    print(key);
-    print(colorMap);
-    print('+++++++');
     if (colorMap.containsKey(key)) {
       return colorMap[key]!;
     }
