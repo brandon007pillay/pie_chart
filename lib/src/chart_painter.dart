@@ -67,7 +67,7 @@ class PieChartPainter extends CustomPainter {
 
     if (gradientList?.isEmpty ?? true) {
       for (int i = 0; i < values.length; i++) {
-        final paint = Paint()..color = getColor(colorList, i);
+        final paint = Paint()..color = getColor(colorList, i, titles!);
         setPaintProps(paint);
         _paintList.add(paint);
       }

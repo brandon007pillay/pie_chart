@@ -254,6 +254,7 @@ class _PieChartState extends State<PieChart>
                       : getColor(
                           widget.colorList,
                           legendTitles!.indexOf(item),
+                          legendTitles!
                         ),
                   style: widget.legendOptions.legendTextStyle,
                   legendShape: widget.legendOptions.legendShape,
