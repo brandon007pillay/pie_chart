@@ -34,11 +34,13 @@ class PieChartPainter extends CustomPainter {
 
   double get drawPercentage => degreeOptions.totalDegrees / fullDegree;
 
+  Map<String, Color>? colorMap; 
   PieChartPainter(
     double angleFactor,
     this.showChartValues,
     this.showChartValuesOutside,
     List<Color> colorList, {
+    this.colorMap, 
     this.chartValueStyle,
     this.chartValueBackgroundColor,
     required List<double> values,
@@ -67,7 +69,7 @@ class PieChartPainter extends CustomPainter {
 
     if (gradientList?.isEmpty ?? true) {
       for (int i = 0; i < values.length; i++) {
-        final paint = Paint()..color = getColor(colorList, i, titles!);
+        final paint = Paint()..color = getColor(colorList, i, titles!, colorMap);
         setPaintProps(paint);
         _paintList.add(paint);
       }

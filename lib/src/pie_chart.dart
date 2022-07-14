@@ -10,29 +10,30 @@ enum LegendPosition { top, bottom, left, right }
 enum ChartType { disc, ring }
 
 class PieChart extends StatefulWidget {
-  const PieChart({
-    required this.dataMap,
-    this.chartType = ChartType.disc,
-    this.chartRadius,
-    this.animationDuration,
-    this.chartLegendSpacing = 48,
-    this.colorList = defaultColorList,
-    this.initialAngleInDegree,
-    this.formatChartValues,
-    this.centerText,
-    this.centerTextStyle,
-    this.ringStrokeWidth = 20.0,
-    this.legendOptions = const LegendOptions(),
-    this.chartValuesOptions = const ChartValuesOptions(),
-    this.emptyColor = Colors.grey,
-    this.gradientList,
-    this.emptyColorGradient = const [Colors.black26, Colors.black54],
-    this.legendLabels = const {},
-    Key? key,
-    this.degreeOptions = const DegreeOptions(),
-    this.baseChartColor = Colors.transparent,
-    this.totalValue,
-  }) : super(key: key);
+  PieChart(
+      {required this.dataMap,
+      this.chartType = ChartType.disc,
+      this.chartRadius,
+      this.animationDuration,
+      this.chartLegendSpacing = 48,
+      this.colorList = defaultColorList,
+      this.initialAngleInDegree,
+      this.formatChartValues,
+      this.centerText,
+      this.centerTextStyle,
+      this.ringStrokeWidth = 20.0,
+      this.legendOptions = const LegendOptions(),
+      this.chartValuesOptions = const ChartValuesOptions(),
+      this.emptyColor = Colors.grey,
+      this.gradientList,
+      this.emptyColorGradient = const [Colors.black26, Colors.black54],
+      this.legendLabels = const {},
+      Key? key,
+      this.degreeOptions = const DegreeOptions(),
+      this.baseChartColor = Colors.transparent,
+      this.totalValue,
+      this.colorMap})
+      : super(key: key);
 
   final Map<String, double> dataMap;
   final ChartType chartType;
@@ -55,6 +56,7 @@ class PieChart extends StatefulWidget {
   final Map<String, String> legendLabels;
   final Color baseChartColor;
   final double? totalValue;
+  final Map<String, Color>? colorMap;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -124,37 +126,36 @@ class _PieChartState extends State<PieChart>
               : null,
           child: CustomPaint(
             painter: PieChartPainter(
-              _animFraction,
-              widget.chartValuesOptions.showChartValues,
-              widget.chartValuesOptions.showChartValuesOutside,
-              widget.colorList,
-              chartValueStyle: widget.chartValuesOptions.chartValueStyle,
-              chartValueBackgroundColor:
-                  widget.chartValuesOptions.chartValueBackgroundColor,
-              values: legendValues,
-              titles: legendTitles,
-              showValuesInPercentage:
-                  widget.chartValuesOptions.showChartValuesInPercentage,
-              decimalPlaces: widget.chartValuesOptions.decimalPlaces,
-              showChartValueLabel:
-                  widget.chartValuesOptions.showChartValueBackground,
-              chartType: widget.chartType,
-              centerText: widget.centerText,
-              centerTextStyle: widget.centerTextStyle,
-              formatChartValues: widget.formatChartValues,
-              strokeWidth: widget.ringStrokeWidth,
-              emptyColor: widget.emptyColor,
-              gradientList: widget.gradientList,
-              emptyColorGradient: widget.emptyColorGradient,
-              degreeOptions: widget.degreeOptions.copyWith(
-                // because we've deprecated initialAngleInDegree,
-                // we want the old value to be used if it's not null
-                // ignore: deprecated_member_use_from_same_package
-                initialAngle: widget.initialAngleInDegree,
-              ),
-              baseChartColor: widget.baseChartColor,
-              totalValue:widget.totalValue
-            ),
+                _animFraction,
+                widget.chartValuesOptions.showChartValues,
+                widget.chartValuesOptions.showChartValuesOutside,
+                widget.colorList,
+                chartValueStyle: widget.chartValuesOptions.chartValueStyle,
+                chartValueBackgroundColor:
+                    widget.chartValuesOptions.chartValueBackgroundColor,
+                values: legendValues,
+                titles: legendTitles,
+                showValuesInPercentage:
+                    widget.chartValuesOptions.showChartValuesInPercentage,
+                decimalPlaces: widget.chartValuesOptions.decimalPlaces,
+                showChartValueLabel:
+                    widget.chartValuesOptions.showChartValueBackground,
+                chartType: widget.chartType,
+                centerText: widget.centerText,
+                centerTextStyle: widget.centerTextStyle,
+                formatChartValues: widget.formatChartValues,
+                strokeWidth: widget.ringStrokeWidth,
+                emptyColor: widget.emptyColor,
+                gradientList: widget.gradientList,
+                emptyColorGradient: widget.emptyColorGradient,
+                degreeOptions: widget.degreeOptions.copyWith(
+                  // because we've deprecated initialAngleInDegree,
+                  // we want the old value to be used if it's not null
+                  // ignore: deprecated_member_use_from_same_package
+                  initialAngle: widget.initialAngleInDegree,
+                ),
+                baseChartColor: widget.baseChartColor,
+                totalValue: widget.totalValue),
             child: const AspectRatio(aspectRatio: 1),
           ),
         ),
@@ -228,7 +229,9 @@ class _PieChartState extends State<PieChart>
     }
   }
 
-  _getLegend({EdgeInsets? padding}) {
+  _getLegend({
+    EdgeInsets? padding,
+  }) {
     if (widget.legendOptions.showLegends) {
       final isGradientPresent = widget.gradientList?.isNotEmpty ?? false;
       final isNonGradientElementPresent =
@@ -254,7 +257,8 @@ class _PieChartState extends State<PieChart>
                       : getColor(
                           widget.colorList,
                           legendTitles!.indexOf(item),
-                          legendTitles!
+                          legendTitles!,
+                          widget.colorMap,
                         ),
                   style: widget.legendOptions.legendTextStyle,
                   legendShape: widget.legendOptions.legendShape,

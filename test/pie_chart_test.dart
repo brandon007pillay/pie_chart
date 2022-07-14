@@ -109,7 +109,7 @@ void main() {
       const Color(0xFFffeaa7),
     ];
     expect(
-      getColor(colorList, 5).runtimeType,
+      getColor(colorList, 5, [], {}).runtimeType,
       Color,
     );
   });
